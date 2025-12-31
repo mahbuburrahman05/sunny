@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy New Year ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      overflow: hidden;
+      color: white;
+    }
+
+    /* ---------- COVER ---------- */
+    .cover {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: radial-gradient(circle, #ff5f9e, #6a0572);
+      transition: transform 1.2s ease;
+      z-index: 10;
+    }
+
+    .cover.hide {
+      transform: translateY(-100%);
+    }
+
+    .cover h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: glow 2s infinite alternate;
+    }
+
+    .cover button {
+      padding: 14px 32px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      background: white;
+      color: #ff2f92;
+      font-weight: 600;
+      transition: transform 0.3s;
+    }
+
+    .cover button:hover {
+      transform: scale(1.1);
+    }
+
+    /* ---------- MAIN ---------- */
+    .main {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .year {
+      font-size: 4.5rem;
+      font-weight: 600;
+      animation: pop 1.2s ease forwards;
+    }
+
+    .wish {
+      margin-top: 20px;
+      font-size: 1.3rem;
+      max-width: 650px;
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 1s;
+    }
+
+    .name {
+      margin-top: 25px;
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      color: #ff77c8;
+      animation: glow 2s infinite alternate;
+    }
+
+    /* ---------- HEARTS ---------- */
+    .heart {
+      position: absolute;
+      font-size: 18px;
+      animation: float 6s linear infinite;
+      color: #ff6fae;
+      opacity: 0.8;
+    }
+
+    /* ---------- CONFETTI ---------- */
+    canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    /* ---------- ANIMATIONS ---------- */
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #fff; }
+      to { text-shadow: 0 0 25px #ff9ad5; }
+    }
+
+    @keyframes pop {
+      from { transform: scale(0); }
+      to { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(100vh) scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(-10vh) scale(1.3);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .year { font-size: 3.2rem; }
+      .wish { font-size: 1.1rem; }
+      .name { font-size: 2.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- COVER -->
+  <div class="cover" id="cover">
+    <h1>Something Special for my sunflower🌻 💖</h1>
+    <button onclick="start()">Open</button>
+  </div>
+
+  <!-- CONFETTI -->
+  <canvas id="confetti"></canvas>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+    <div class="year">Happy New Year 2026 🎆</div>
+
+    <div class="wish">
+      A brand new year, a brand new chapter ✨  <br>
+      tomar sathe katano din gula amar life e best chilo .. jodio amra relation e chilam na but er cheye kom kichu o chilona.. <br>
+      shotti bolte i miss those days.. onek bhaloi gesilo... onek understanding chilo amader majhe.. <br>
+      akhon to tumi tmr life guchai niso... new life shuru korso.. tumi happy thako always etai chai 
+    </div>
+
+    <div class="name">— Best of luck Sunny. 🌸</div>
+  </div>
+
+  <script>
+    /* ---------- COVER ---------- */
+    function start() {
+      document.getElementById("cover").classList.add("hide");
+      startConfetti();
+    }
+
+    /* ---------- HEARTS ---------- */
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 7000);
+    }
+
+    setInterval(createHeart, 400);
+
+    /* ---------- CONFETTI ---------- */
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let confetti = [];
+
+    function startConfetti() {
+      for (let i = 0; i < 150; i++) {
+        confetti.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 6 + 2,
+          d: Math.random() * 5 + 2,
+          color: `hsl(${Math.random() * 360}, 100%, 70%)`
+        });
+      }
+      animateConfetti();
+    }
+
+    function animateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confetti.forEach(c => {
+        ctx.beginPath();
+        ctx.fillStyle = c.color;
+        ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        c.y += c.d;
+        if (c.y > canvas.height) c.y = -10;
+      });
+      requestAnimationFrame(animateConfetti);
+    }
+
+    window.onresize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+  </script>
+</body>
+</html>
